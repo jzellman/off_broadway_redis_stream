@@ -43,7 +43,7 @@ defmodule OffBroadwayRedisStream.Heartbeat do
         :ok
 
       {:error, %RedisClient.ConnectionError{} = error} when retry_count < @max_retries ->
-        Logger.warn(
+        Logger.warning(
           "Failed to create group, retry_count: #{retry_count}, reason: #{inspect(error.reason)}"
         )
 
@@ -65,7 +65,7 @@ defmodule OffBroadwayRedisStream.Heartbeat do
         Process.send_after(self(), :heartbeat, interval)
 
       {:error, %RedisClient.ConnectionError{} = error} when retry_count < @max_retries ->
-        Logger.warn(
+        Logger.warning(
           "Failed to send heartbeat, retry_count: #{retry_count}, reason: #{inspect(error.reason)}"
         )
 
